@@ -175,3 +175,14 @@ and (max-width : 775px) {
 }
 
 CSS
+
+
+Discourse::Application.routes.append do
+	get "ads.txt" => "discourse_ads/ads#index" #, :defaults => { :format => 'test' }
+end
+
+load File.expand_path('../lib/txt/engine.rb', __FILE__)
+
+after_initialize do
+	ActionController::Base.prepend_view_path File.expand_path("../custom_views", __FILE__) 
+end
